@@ -1,0 +1,92 @@
+{
+  "consumer": {
+    "name": "MyConsumer"
+  },
+  "interactions": [
+    {
+      "description": "A get request to get a pet 1845563262948980200",
+      "providerStates": [
+        {
+          "name": "A pet 1845563262948980200 exists"
+        }
+      ],
+      "request": {
+        "headers": {
+          "api_key": "[]"
+        },
+        "method": "GET",
+        "path": "/v2/pet/1845563262948980200"
+      },
+      "response": {
+        "body": {
+          "options": {
+            "SUPER": {
+              "selected": true,
+              "value": 120
+            }
+          }
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$.options": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "values"
+                }
+              ]
+            },
+            "$.options.*.*": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                },
+                {
+                  "match": "integer"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    },
+    {
+      "description": "A get request to get a pet 1845563262948980200",
+      "providerStates": [
+        {
+          "name": "No pets exist"
+        }
+      ],
+      "request": {
+        "headers": {
+          "api_key": "[]"
+        },
+        "method": "GET",
+        "path": "/v2/pet/1845563262948980200"
+      },
+      "response": {
+        "status": 404
+      }
+    }
+  ],
+  "metadata": {
+    "pact-js": {
+      "version": "11.0.2"
+    },
+    "pactRust": {
+      "ffi": "0.4.0",
+      "models": "1.0.4"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "pactWith v3"
+  }
+}

@@ -1,4 +1,4 @@
-import { V3MockServer } from '@pact-foundation/pact';
+import { MatchersV3, V3MockServer } from '@pact-foundation/pact';
 import { agent } from 'supertest';
 import { pactWith } from './index';
 
@@ -17,6 +17,31 @@ pactWith({ consumer: 'MyConsumer', provider: 'pactWith v3' }, (interaction) => {
         })
         .willRespondWith({
           status: 200,
+          // Hypothetical response from an API
+          // body: {
+          //   options: {
+          //     'DEFAULT': {
+          //       value: MatchersV3.integer(12),
+          //       selected: MatchersV3.boolean(false)
+          //     },
+          //     'SUPER': {
+          //       value: MatchersV3.integer(120),
+          //       selected: MatchersV3.boolean(true)
+          //     },
+          //     'LUXERY': {
+          //       value: MatchersV3.integer(12000),
+          //       selected: MatchersV3.boolean(false)
+          //     }
+          //   }
+          // }
+
+          // Pact for this API
+          body: {
+            options: MatchersV3.eachKeyLike('SUPER', {
+              value: MatchersV3.integer(120),
+              selected: MatchersV3.boolean(true),
+            }),
+          },
         })
     );
 
