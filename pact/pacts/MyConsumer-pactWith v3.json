@@ -19,6 +19,12 @@
       },
       "response": {
         "body": {
+          "optionArray": [
+            {
+              "selected": true,
+              "value": 120
+            }
+          ],
           "options": {
             "SUPER": {
               "selected": true,
@@ -31,6 +37,31 @@
         },
         "matchingRules": {
           "body": {
+            "$.optionArray": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 1
+                }
+              ]
+            },
+            "$.optionArray[*].selected": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.optionArray[*].value": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
             "$.options": {
               "combine": "AND",
               "matchers": [
